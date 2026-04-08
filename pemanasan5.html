@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <h2>Pemanasan #4</h2>
-    <p>Ini adalah contoh pustaka untuk memeriksa apakah alamat berkas (<i>file path</i>) punya titik (<code>.</code>) atau tidak.</p>
-    <p>Karena ini dimaksudkan untuk digunakan untuk berkas lain, perhatikan impor dan ekspor ya!.</p>
+    <h2>Pemanasan #5</h2>
+    <p>Ini adalah kode program untuk menggambungkan kedua objek.</p>
+    <p>Selamat menikmati!</p>
     <p><a href=".">Balik ke laman utama</a></p>
 
     <div id="sortableTrash" class="sortable-code"></div>
@@ -29,13 +29,17 @@
     <script src="./lib/lis.js"></script>
     <script src="./parsons.js"></script>
     <script>
-        var initial = 'function dotfileRegex() {\n' +
-            '    return /(?:^|[\\\\\\/])(\\.(?!\\.)[^\\\\\\/]+)$/;\n' +
-            '};\n' +
-            '\n' +
-            'module.exports = function (str) {\n' +
-            '    return dotfileRegex().test(str);\n' +
-            '};\n';
+        var initial = 'function mergeObjects(a, b) {\n' +
+            '  if(a === null || typeof a !== \'object\') return b;\n' +
+            '  if(b === null || typeof b !== \'object\') return b;\n' +
+            '  const obj = Array.isArray(a) ? [...a] : a;\n' +
+            '  for(const key in b) {\n' +
+            '    if(b.hasOwnProperty(key)) {\n' +
+            '      obj[key] = mergeObjects(obj[key], b[key]);\n' +
+            '    }\n' +
+            '  }\n' +
+            '  return obj;\n' +
+            '}\n';
 
         function displayErrors(fb) {
             if (fb.errors.length > 0) {
@@ -62,7 +66,7 @@
             });
         });        
     </script>
-    <!-- https://www.npmjs.com/package/is-url -->
+    <!-- https://github.com/beforesemicolon/javascript-solutions/blob/main/merge%20objects -->
 </body>
 
 </html>
