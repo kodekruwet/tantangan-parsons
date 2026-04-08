@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Tantangan Parsons</title>
+    <link href="../../parsons.css" rel="stylesheet" />
+    <link href="../../lib/prettify.css" rel="stylesheet" />
+    <script src="../../lib/prettify.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <link rel="stylesheet" href="../../lib/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Pemanasan JavaScript #4</h2>
+        <p>Susunlah agar menghasilkan program yang berjalan benar.</p>
+        <p>Ini adalah program untuk memastikan apakah data yang dimasukkan adalah alamat berkas komputer berbentuk relatif (mis. "User/Admin/Pictures/img.jpg") atau tidak (mis. "C:/User/Admin/Pictures/img.jpg"). Petunjuk: Pastikan komentar JSDoc juga valid.</p>
+        <p><a href="/">Balik ke laman utama</a></p>
+
+        <div id="sortableTrash" class="sortable-code"></div>
+        <div id="sortable" class="sortable-code"></div>
+        <div style="clear:both;"></div>
+        <p>
+            <button class='restart' href="#" id="newInstanceLink">Ulangi lagi</button>
+            <button class='submit' href="#" id="feedbackLink">Periksa jawabannya</button>
+        </p>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui.min.js"></script>
+        <script src="./../lib/jquery.ui.touch-punch.min.js"></script>
+        <script src="../../lib/underscore-min.js"></script>
+        <script src="../../lib/lis.js"></script>
+        <script src="../../parsons.js"></script>
+        <script>
+            var initial = 'var isAbsolute = require(\'path\').isAbsolute;\n' +
+                '/**\n' +
+                '* @param  {String}  path\n' +
+                '* @return {Boolean}\n' +
+                '*/\n' +
+                'module.exports = function isRelative(path) {\n' +
+                '  return !isAbsolute(path);\n' +
+                '};\n';
+            function displayErrors(fb) {
+                if (fb.errors.length > 0) {
+                    alert(fb.errors[0]);
+                }
+            }
+            $(document).ready(function () {
+                var parson = new ParsonsWidget({
+                    'sortableId': 'sortable',
+                    'trashId': 'sortableTrash',
+                    'max_wrong_lines': 2,
+                    'feedback_cb': displayErrors
+                });
+                parson.init(initial);
+                parson.shuffleLines();
+                $("#newInstanceLink").click(function (event) {
+                    event.preventDefault();
+                    parson.shuffleLines();
+                });
+                $("#feedbackLink").click(function (event) {
+                    event.preventDefault();
+                    parson.getFeedback();
+                });
+            });
+        </script>
+    </div>
+    <!-- https://www.npmjs.com/package/is-relative-path -->
+</body>
+
+</html>
